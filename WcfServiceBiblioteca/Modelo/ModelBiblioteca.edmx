@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BibliotecaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="Isbn" />
+          </Key>
+          <Property Name="Isbn" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ubicacion">
+          <Key>
+            <PropertyRef Name="Isbn" />
+          </Key>
+          <Property Name="Isbn" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Estante" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sala" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Librero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Posicion" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'C:\USERS\065928781\DOCUMENTS\NET\WCFSERVICEBIBLIOTECA\WCFSERVICEBIBLIOTECA\APP_DATA\BIBLIOTECA.MDF.dbo.Libro_Ubicacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Libro_Ubicacion">
+          <Key>
+            <PropertyRef Name="Isbn" />
+            <PropertyRef Name="Titulo" />
+            <PropertyRef Name="Estante" />
+            <PropertyRef Name="Librero" />
+            <PropertyRef Name="Posicion" />
+            <PropertyRef Name="Sala" />
+          </Key>
+          <Property Name="Isbn" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estante" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Librero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Posicion" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sala" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BibliotecaModelStoreContainer">
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libro_Ubicacion" EntityType="Self.Libro_Ubicacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Libro_Ubicacion].[Isbn] AS [Isbn], 
+    [Libro_Ubicacion].[Titulo] AS [Titulo], 
+    [Libro_Ubicacion].[Estante] AS [Estante], 
+    [Libro_Ubicacion].[Librero] AS [Librero], 
+    [Libro_Ubicacion].[Posicion] AS [Posicion], 
+    [Libro_Ubicacion].[Sala] AS [Sala]
+    FROM [dbo].[Libro_Ubicacion] AS [Libro_Ubicacion]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BibliotecaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="Isbn" />
+          </Key>
+          <Property Name="Isbn" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ubicacion">
+          <Key>
+            <PropertyRef Name="Isbn" />
+          </Key>
+          <Property Name="Isbn" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sala" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Librero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Posicion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BibliotecaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Libro" EntityType="Self.Libro" />
+          <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" />
+          <EntitySet Name="Libro_Ubicacion" EntityType="BibliotecaModel.Libro_Ubicacion" />
+        </EntityContainer>
+        <EntityType Name="Libro_Ubicacion">
+          <Key>
+            <PropertyRef Name="Isbn" />
+            <PropertyRef Name="Titulo" />
+            <PropertyRef Name="Estante" />
+            <PropertyRef Name="Librero" />
+            <PropertyRef Name="Posicion" />
+            <PropertyRef Name="Sala" />
+          </Key>
+          <Property Name="Isbn" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estante" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Librero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Posicion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Sala" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BibliotecaModelStoreContainer" CdmEntityContainer="BibliotecaEntities">
+          <EntitySetMapping Name="Libro">
+            <EntityTypeMapping TypeName="BibliotecaModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ubicacion">
+            <EntityTypeMapping TypeName="BibliotecaModel.Ubicacion">
+              <MappingFragment StoreEntitySet="Ubicacion">
+                <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+                <ScalarProperty Name="Estante" ColumnName="Estante" />
+                <ScalarProperty Name="Sala" ColumnName="Sala" />
+                <ScalarProperty Name="Librero" ColumnName="Librero" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libro_Ubicacion">
+            <EntityTypeMapping TypeName="BibliotecaModel.Libro_Ubicacion">
+              <MappingFragment StoreEntitySet="Libro_Ubicacion">
+                <ScalarProperty Name="Sala" ColumnName="Sala" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="Librero" ColumnName="Librero" />
+                <ScalarProperty Name="Estante" ColumnName="Estante" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
